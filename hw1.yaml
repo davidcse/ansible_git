@@ -1,0 +1,16 @@
+---
+- hosts: hw1
+  vars: 
+    server_dir: /var/www/html
+  tasks:
+    - name: checkout the remote git repo 
+      git: 
+        repo: https://github.com/davidcse/ansible_git.git
+        dest: "{{ server_dir }}"
+        update: yes
+        force: yes
+        #accept_hostkey: yes
+    - name: Checking if apache2 is installed
+      apt: pkg=apache2 state=present update_cache=yes
+    - name: start apache2, if it is not running yet. 
+      service: name=apache2 state=started
