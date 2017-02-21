@@ -3,6 +3,8 @@
   vars: 
     server_dir: /var/www/html
   tasks:
+    - name: make sure git is installed 
+      apt: pkg=git state=present update_cache=yes
     - name: checkout the remote git repo 
       git: 
         repo: https://github.com/davidcse/ansible_git.git
